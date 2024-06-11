@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <div hidden="true">Interactive Malware Detection Diagram</div>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="description">
+      <h1>
+        "A novel deep learning-based approach for malware detection" - An
+        Interactive Diagram
+      </h1>
+      <p>
+        This interactive diagram illustrates the process of detecting malware in
+        portable executable (PE) files using deep learning techniques. 
+      </p>
+      <p>
+        <strong>Hover over a component to learn more about its role in the malware
+        detection process.</strong>
+      </p>
+      </p>
+    </div>
+    <div class="diagram-container">
+      <img
+        src="./media/pipeline.png"
+        alt="Malware Detection Diagram"
+        class="background-image"
+      />
+
+      <!-- PE Binary -->
+      <div
+        class="component"
+        id="pe-binary"
+        style="left: 0.5%; top: 2.2%; width: 12.2%; height: 8%"
+      ></div>
+      <div hidden="true" id="tooltip-pe-binary">
+        The raw binary data of portable executable files are extracted.
+      </div>
+
+      <!-- Binary to 8-bit Vector -->
+      <div
+        class="component"
+        id="binary-to-vector"
+        style="left: 17.3%; top: 2.1%; width: 19.6%; height: 10.6%"
+      ></div>
+      <div hidden="true" id="tooltip-binary-to-vector">
+        The raw binary data of PE files is reinterpreted as an 8-bit vector.
+      </div>
+
+      <!-- 8-bit Vector to 2D Array -->
+      <div
+        class="component"
+        id="vector-to-array"
+        style="left: 40.9%; top: 2.1%; width: 19.6%; height: 10.6%"
+      ></div>
+      <div hidden="true" id="tooltip-vector-to-array">
+        The 8-bit vector is organized into a 2D array, which is in this case 224
+        rows by 224 columns.
+      </div>
+
+      <!-- Color Mapping -->
+      <div
+        class="component"
+        id="color-mapping"
+        style="left: 64.5%; top: 2.1%; width: 19.6%; height: 10.6%"
+      ></div>
+      <div hidden="true" id="tooltip-color-mapping">
+        A color mapping is applied to the 2D array to create an image.
+      </div>
+
+      <!-- Image Output -->
+      <div
+        class="component"
+        id="image-output"
+        style="left: 88%; top: 2.1%; width: 11%; height: 11.7%"
+      ></div>
+      <div hidden="true" id="tooltip-image-output">
+        The result is a 224x224 RGB image that represents the input executable
+        data.
+      </div>
+
+      <!-- Pre-processed PE Image Dataset -->
+      <div
+        class="component"
+        id="pe-image-dataset"
+        style="left: 0%; top: 26%; width: 20.3%; height: 21%"
+      ></div>
+      <div hidden="true" id="tooltip-pe-image-dataset">
+        Malware is collected from the following datasets:
+        <ul>
+          <li>Microsoft malware dataset (Microsoft, 2015)</li>
+          <li>Malimg (Nataraj et al., 2011)</li>
+          <li>VirusShare (VirusShare, 2022)</li>
+        </ul>
+        Benign software is collected from multiple online resources, including:
+        <ul>
+          <li>Softpedia.com</li>
+          <li>Download.com</li>
+          <li>Internet download sites (Al-Dujaili et al., 2018)</li>
+        </ul>
+
+        These samples of software are converted into images using the
+        aforementioned process, resulting in a dataset of PE images.
+      </div>
+
+      <!-- Data Splitting -->
+      <div
+        class="component"
+        id="data-splitting"
+        style="left: 26.3%; top: 26.1%; width: 10.1%; height: 21%"
+      ></div>
+      <div hidden="true" id="tooltip-data-splitting">
+        The dataset is split into training, validation, and testing subsets. The
+        Malimg dataset is used to test the performance of the framework, and the
+        VirusShare dataset is used to test its generalization capabilties, being
+        composed of many real-life malware samples.
+      </div>
+
+      <!-- Pre-trained Model and Transfer Learning -->
+      <div
+        class="component"
+        id="pretrained-model"
+        style="left: 42.5%; top: 25.75%; width: 51.6%; height: 20%"
+      ></div>
+      <div hidden="true" id="tooltip-pretrained-model">
+        A pre-trained model trained from the ImageNet dataset for general image
+        recognition is used to identify deep features in the PE images. The deep
+        learning pre-trained model is not specifically designed for the malware
+        detection task, so rather than using it for classification, all the
+        features are extracted from the last fully connected layer to be
+        utilized instead in a model trained exclusively on the malware images.
+      </div>
+
+      <!-- Extracted Deep Features in 1D -->
+      <div
+        class="component"
+        id="extracted-features"
+        style="left: 0%; top: 64.1%; width: 20%; height: 25%"
+      ></div>
+      <div hidden="true" id="tooltip-extracted-features">
+        The model extracts deep features from the images, represented in a 1D
+        format. These features are then used to train a classifier for malware
+        detection.
+      </div>
+
+      <!-- Final Malware Classifier -->
+      <div
+        class="component"
+        id="malware-classifier"
+        style="left: 32.5%; top: 60%; width: 47%; height: 31%"
+      ></div>
+      <div hidden="true" id="tooltip-malware-classifier">
+        The extracted features are fed into a final classifier Support Vector
+        Machine to distinguish between benign and malicious samples, and the
+        classifier outputs the final decision.
+      </div>
+
+      <!-- Classification Output -->
+      <div
+        class="component"
+        id="classification-output"
+        style="left: 79.8%; top: 68%; width: 19.5%; height: 12%"
+      ></div>
+      <div hidden="true" id="tooltip-classification-output">
+        The resulting classification of the image represents whether or not the
+        executable file is malware. The classification process achieves an
+        accuracy of 99.06% on the Malimg dataset.
+      </div>
+    </div>
+    <br />
+    <div class="description">
+      <p>
+        Kamran Shaukat, Suhuai Luo, Vijay Varadharajan,
+        <br />
+        <em>A novel deep learning-based approach for malware detection</em>,
+        <br />
+        Engineering Applications of Artificial Intelligence, Volume 122, 2023,
+        106030, ISSN 0952-1976,
+        <br />
+        https://doi.org/10.1016/j.engappai.2023.106030.
+      </p>
+    </div>
+    <script src="scripts.js"></script>
+  </body>
+</html>
