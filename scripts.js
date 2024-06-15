@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function() {
         component.addEventListener("mouseover", function(event) {
             const tooltipId = "tooltip-" + this.id;
             const tooltipText = document.getElementById(tooltipId).innerHTML;
-            showTooltip(event, tooltipText);
+            showTooltip(event, tooltipId, tooltipText);
 
             // Set the current component as hovered and others as dimmed
             components.forEach(c => {
@@ -28,14 +28,28 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    function showTooltip(event, text) {
+    function showTooltip(event, tooltipId, text) {
         const tooltip = document.createElement("div");
-        tooltip.className = "tooltip";
+        tooltip.className = "tooltip visible";
         tooltip.innerHTML = text;
+        tooltip.id = "active-tooltip";
+        tooltip.style.backgroundColor = getComputedStyle(document.getElementById(tooltipId)).backgroundColor;
         document.body.appendChild(tooltip);
-        tooltip.style.left = event.pageX + 5 + "px";
-        tooltip.style.top = event.pageY + 5 + "px";
-        tooltip.style.display = "block";
+
+        // Position tooltip better on smaller screens
+        const tooltipRect = tooltip.getBoundingClientRect();
+        let top = event.pageY + 5;
+        let left = event.pageX + 5;
+        
+        if (top + tooltipRect.height > window.innerHeight) {
+            top = event.pageY - tooltipRect.height - 5;
+        }
+        if (left + tooltipRect.width > window.innerWidth) {
+            left = event.pageX - tooltipRect.width - 5;
+        }
+
+        tooltip.style.left = left + "px";
+        tooltip.style.top = top + "px";
     }
 
     function hideTooltip() {

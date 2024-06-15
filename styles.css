@@ -1,29 +1,62 @@
+/* Main container styles */
 .description {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     font-size: 18px;
+    margin: 20px 0;
+    color: #333; /* Dark gray for text */
+    background-color: #b3e6ff;
+    width: 85%;
+    border-radius: 8px;
 }
 
+/* Body styling for centering the content and adding some margin */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #dfdfdf; /* Light background color for better contrast */
+}
+
+/* wraps the diagram container to give it a 
+    white background and some padding */
+.diagram-wrapper {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.widener {
+    width: 70%; /* Adjust this to control the zoom level */
+}
+
+/* Diagram container */
 .diagram-container {
     position: relative;
-    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #ffffff
 }
 
+/* Background image */
 .background-image {
     width: 100%;
     height: auto;
     display: block;
 }
 
+/* Component containers */
 .component {
     position: absolute;
     background: rgba(255, 255, 255, 0); /* Fully transparent by default */
-    border: 2px solid #33333300;
+    border: 2px solid transparent;
     cursor: pointer;
     box-sizing: border-box;
-    transition: background 0.3s; /* Smooth transition for background change */
+    transition: background 0.3s, border-color 0.3s; /* Smooth transition */
 }
 
 .component.hover {
@@ -34,17 +67,73 @@
     background: rgba(255, 255, 255, 0.5); /* 50% transparent for dimmed elements */
 }
 
+/* Tooltip styling */
 .tooltip {
     display: none;
     position: absolute;
     background-color: #fff;
     border: 1px solid #333;
-    padding: 10px; /* Increased padding for better readability */
-    border-radius: 3px;
-    font-size: 16px; /* Increased font size */
-    max-width: 300px; /* Maximum width for tooltips */
-    word-wrap: break-word; /* Ensure long words break and wrap */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visibility */
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    max-width: 300px;
+    word-wrap: break-word;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     pointer-events: none;
     z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
+
+/* Tooltip color based on component ID */
+#tooltip-pe-binary {
+    background-color: #ffcccc; /* Light red */
+}
+
+#tooltip-binary-to-vector {
+    background-color: #ccffcc; /* Light green */
+}
+
+#tooltip-vector-to-array {
+    background-color: #ccccff; /* Light blue */
+}
+
+#tooltip-color-mapping {
+    background-color: #ffffcc; /* Light yellow */
+}
+
+#tooltip-image-output {
+    background-color: #ffccff; /* Light pink */
+}
+
+#tooltip-pe-image-dataset {
+    background-color: #ccffff; /* Light cyan */
+}
+
+#tooltip-data-splitting {
+    background-color: #ffd9b3; /* Light orange */
+}
+
+#tooltip-pretrained-model {
+    background-color: #e6ccff; /* Light purple */
+}
+
+#tooltip-extracted-features {
+    background-color: #b3e6ff; /* Light sky blue */
+}
+
+#tooltip-mw-classifier {
+    background-color: #d9b3ff; /* Light violet */
+}
+
+#tooltip-classification-output {
+    background-color: #b3ffb3; /* Light lime */
+}
+
+.tooltip.visible {
+    display: block;
+    opacity: 1;
+}
+
+/* Modern font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
