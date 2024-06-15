@@ -8,6 +8,7 @@
     background-color: #b3e6ff;
     width: 85%;
     border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Body styling for centering the content and adding some margin */
@@ -17,7 +18,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 20px;
-    background-color: #dfdfdf; /* Light background color for better contrast */
+    background-color: #8bb5cb; /* Light background color for better contrast */
 }
 
 /* wraps the diagram container to give it a 
